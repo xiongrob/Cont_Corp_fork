@@ -1,0 +1,9 @@
+LICENSE
+README.md
+pyproject.toml
+src/mania2json/__init__.py
+src/mania2json/core.py
+src/mania2json.egg-info/PKG-INFO
+src/mania2json.egg-info/SOURCES.txt
+src/mania2json.egg-info/dependency_links.txt
+src/mania2json.egg-info/top_level.txt

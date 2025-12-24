@@ -1,0 +1,609 @@
+{
+  "title": "Kimi wo Mitai",
+  "artist": "Yunosuke",
+  "audio_filename": "audio.mp3",
+  "mode": 3,
+  "circle_size": 4,
+  "hit_objects": [
+    {
+      "x": 0,
+      "time": 246,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 722,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 1198,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 1674,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 1793,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 1912,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 2031,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 2388,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 2745,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 3103,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 3222,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 3341,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 3460,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 3698,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 3817,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 4055,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 4531,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 5007,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 5484,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 5603,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 5722,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 5841,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 6198,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 6555,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 6912,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 7031,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 7150,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 7269,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 7507,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 7626,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 7865,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 8341,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 8817,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 9293,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 9412,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 9531,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 9650,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 10007,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 10365,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 10722,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 10841,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 10960,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 11079,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 11317,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 11436,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 11674,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 12150,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 12626,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 13103,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 13222,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 13341,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 13460,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 13817,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 14174,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 14531,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 14650,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 14769,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 14888,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 15126,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 15245,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 15484,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 15960,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 16436,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 16912,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 17031,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 17150,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 17269,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 17626,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 17984,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 18341,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 18460,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 18579,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 18698,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 18936,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 19055,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 19293,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 19769,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 20245,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 20722,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 20841,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 20960,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 21079,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 21436,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 21793,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 22150,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 22269,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 22388,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 22507,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 22745,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 22865,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 23103,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 23579,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 24055,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 24531,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 24650,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 24769,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 24888,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 25245,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 25603,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 25960,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 26079,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 26198,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 26317,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 26555,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 26674,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 26912,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 27388,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 27865,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 28341,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 28460,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 28579,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 28698,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 29055,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 29412,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 29769,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 29888,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 30007,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 30126,
+      "type": "note"
+    },
+    {
+      "x": 2,
+      "time": 30365,
+      "type": "note"
+    },
+    {
+      "x": 0,
+      "time": 30484,
+      "type": "note"
+    }
+  ]
+}

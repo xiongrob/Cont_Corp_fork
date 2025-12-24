@@ -1,0 +1,108 @@
+[gd_scene load_steps=4 format=3 uid="uid://cti3bw8is5x5c"]
+
+[ext_resource type="Script" uid="uid://cyg6vt6yn311j" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://dqib8us1j0mgg" path="res://ui.gd" id="2_0xm2m"]
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 1
+background_color = Color(0.039215688, 0.039215688, 0.039215688, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_ig7tw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
+fov = 50.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0, 10, 10)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_0xm2m")
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Notes" type="Node3D" parent="."]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_0xm2m")
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1040.0
+offset_right = 1101.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
+horizontal_alignment = 2
+
+[node name="ComboLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 1020.0
+offset_top = 30.0
+offset_right = 1102.0
+offset_bottom = 53.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "Combo: 0x"
+horizontal_alignment = 2
+
+[node name="MenuPanel" type="Panel" parent="UI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 340.0
+offset_top = 160.0
+offset_right = 740.0
+offset_bottom = 460.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="UI/MenuPanel"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 82.0
+offset_right = 255.0
+offset_bottom = 105.0
+text = "Rhythm Game"
+
+[node name="LoadMapButton" type="Button" parent="UI/MenuPanel"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 110.0
+offset_right = 228.0
+offset_bottom = 141.0
+text = "Load Map"
+
+[node name="LoadAudioButton" type="Button" parent="UI/MenuPanel"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 146.0
+offset_right = 239.0
+offset_bottom = 177.0
+text = "Load Audio"
+
+[node name="StartButton" type="Button" parent="UI/MenuPanel"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 182.0
+offset_right = 240.0
+offset_bottom = 213.0
+text = "Start Game"
+
+[node name="FileDialog" type="FileDialog" parent="UI/MenuPanel"]
+oversampling_override = 1.0

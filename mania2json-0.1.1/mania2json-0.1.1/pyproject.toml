@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mania2json"
+version = "0.1.1"
+authors = [
+    {name = "glassive", email = "workingofpatch@gmail.com"},
+]
+description = "A Python library for parsing osu!mania 4k beatmap files"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Games/Entertainment",
+]
+keywords = ["osu!", "osu", "mania", "4k", "beatmap", "parser", "rhythm-game"]
+
+[project.urls]
+Homepage = "https://github.com/glassive/mania2json"
+"Bug Tracker" = "https://github.com/glassive/mania2json/issues"
