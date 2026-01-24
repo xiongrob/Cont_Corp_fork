@@ -13,3 +13,7 @@ config_version=5
 config/name="rhythm game"
 run/main_scene="uid://cti3bw8is5x5c"
 config/features=PackedStringArray("4.5", "Forward Plus")
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

@@ -1,0 +1,25 @@
+[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://wjno8ytgdk86"]
+
+[resource]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 7.0
+emission_ring_cone_angle = 90.0
+inherit_velocity_ratio = 0.655
+spread = 180.0
+initial_velocity_min = 64.6
+initial_velocity_max = 131.78
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -31.270002
+linear_accel_max = 35.909996
+radial_accel_min = -100.0
+radial_accel_max = -29.970001
+tangential_accel_min = -50.39
+tangential_accel_max = 16.279997
+damping_min = 68.992004
+damping_max = 100.00001
+hue_variation_min = -0.030000022
+hue_variation_max = 0.029999977
