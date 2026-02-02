@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cqtpodhs44duc"]
+
+[ext_resource type="Script" uid="uid://ke5vbh80p5eu" path="res://hitDetect.gd" id="1_m05tf"]
+
+[node name="HitDetect" type="Label" unique_id=1468537862]
+offset_right = 100.0
+offset_bottom = 73.0
+text = "Hello!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_trim_flags = 128
+script = ExtResource("1_m05tf")
+
+[node name="Visibility" type="Timer" parent="." unique_id=724110613]
+wait_time = 2.0
+one_shot = true

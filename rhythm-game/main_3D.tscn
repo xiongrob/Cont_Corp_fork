@@ -1,37 +1,37 @@
-[gd_scene load_steps=4 format=3 uid="uid://cti3bw8is5x5c"]
+[gd_scene format=3 uid="uid://cti3bw8is5x5c"]
 
-[ext_resource type="Script" uid="uid://cyg6vt6yn311j" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://d0p1ywpjykdn5" path="res://main_3D.gd" id="1_c206b"]
 [ext_resource type="Script" uid="uid://dqib8us1j0mgg" path="res://ui.gd" id="2_0xm2m"]
 
 [sub_resource type="Environment" id="Environment_0xm2m"]
 background_mode = 1
 background_color = Color(0.039215688, 0.039215688, 0.039215688, 1)
 
-[node name="Node3D" type="Node3D"]
-script = ExtResource("1_ig7tw")
+[node name="Node3D" type="Node3D" unique_id=198837975]
+script = ExtResource("1_c206b")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=282562164]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15)
 fov = 50.0
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=389831675]
 transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071067, 0, -0.7071067, 0.7071067, 0, 10, 10)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=556194451]
 environment = SubResource("Environment_0xm2m")
 
-[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="." unique_id=334558143]
 
-[node name="Notes" type="Node3D" parent="."]
+[node name="Notes" type="Node3D" parent="." unique_id=1656911622]
 
-[node name="UI" type="Control" parent="."]
+[node name="UI" type="Control" parent="." unique_id=4320336]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("2_0xm2m")
 
-[node name="ScoreLabel" type="Label" parent="UI"]
+[node name="ScoreLabel" type="Label" parent="UI" unique_id=508536260]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -44,7 +44,7 @@ theme_override_font_sizes/font_size = 24
 text = "Score: 0"
 horizontal_alignment = 2
 
-[node name="ComboLabel" type="Label" parent="UI"]
+[node name="ComboLabel" type="Label" parent="UI" unique_id=820041962]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -58,7 +58,7 @@ theme_override_font_sizes/font_size = 24
 text = "Combo: 0x"
 horizontal_alignment = 2
 
-[node name="MenuPanel" type="Panel" parent="UI"]
+[node name="MenuPanel" type="Panel" parent="UI" unique_id=1034253696]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -72,7 +72,7 @@ offset_bottom = 460.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TitleLabel" type="Label" parent="UI/MenuPanel"]
+[node name="TitleLabel" type="Label" parent="UI/MenuPanel" unique_id=465139432]
 layout_mode = 0
 offset_left = 144.0
 offset_top = 82.0
@@ -80,7 +80,7 @@ offset_right = 255.0
 offset_bottom = 105.0
 text = "Rhythm Game"
 
-[node name="LoadMapButton" type="Button" parent="UI/MenuPanel"]
+[node name="LoadMapButton" type="Button" parent="UI/MenuPanel" unique_id=1774515234]
 layout_mode = 0
 offset_left = 144.0
 offset_top = 110.0
@@ -88,7 +88,7 @@ offset_right = 228.0
 offset_bottom = 141.0
 text = "Load Map"
 
-[node name="LoadAudioButton" type="Button" parent="UI/MenuPanel"]
+[node name="LoadAudioButton" type="Button" parent="UI/MenuPanel" unique_id=2061970732]
 layout_mode = 0
 offset_left = 144.0
 offset_top = 146.0
@@ -96,7 +96,7 @@ offset_right = 239.0
 offset_bottom = 177.0
 text = "Load Audio"
 
-[node name="StartButton" type="Button" parent="UI/MenuPanel"]
+[node name="StartButton" type="Button" parent="UI/MenuPanel" unique_id=216911356]
 layout_mode = 0
 offset_left = 144.0
 offset_top = 182.0
@@ -104,5 +104,5 @@ offset_right = 240.0
 offset_bottom = 213.0
 text = "Start Game"
 
-[node name="FileDialog" type="FileDialog" parent="UI/MenuPanel"]
+[node name="FileDialog" type="FileDialog" parent="UI/MenuPanel" unique_id=1729641041]
 oversampling_override = 1.0

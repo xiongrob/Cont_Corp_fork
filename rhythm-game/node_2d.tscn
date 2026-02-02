@@ -1,8 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://kuxl51n0xn6p"]
+[gd_scene load_steps=11 format=3 uid="uid://bnq0ie21dqdmm"]
 
 [ext_resource type="Script" uid="uid://bwb058y77b6u8" path="res://node_2d.gd" id="1_wtcfe"]
 [ext_resource type="Texture2D" uid="uid://deqx3as1xgwnn" path="res://targets_neutral.png" id="2_0e48y"]
 [ext_resource type="Texture2D" uid="uid://b7iuupxh4bndr" path="res://presets/slight_hold_curve.tres" id="3_epypp"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_epypp"]
+
+[sub_resource type="Gradient" id="Gradient_epypp"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_epypp"]
+gradient = SubResource("Gradient_epypp")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0e48y"]
 particle_flag_disable_z = true
@@ -26,6 +33,7 @@ tangential_accel_max = 16.279997
 damping_min = 68.992004
 damping_max = 100.00001
 color = Color(0.3529412, 0.6431373, 0.78039217, 1)
+color_ramp = SubResource("GradientTexture1D_epypp")
 alpha_curve = ExtResource("3_epypp")
 hue_variation_min = -0.030000022
 hue_variation_max = 0.029999977
@@ -115,6 +123,7 @@ script = ExtResource("1_wtcfe")
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 320.0
 offset_bottom = 180.0
+rotation = 0.00018529128
 color = Color(0.12513235, 0.12512228, 0.16647366, 1)
 metadata/_edit_use_anchors_ = true
 
@@ -129,6 +138,7 @@ hframes = 4
 position = Vector2(106, 60)
 emitting = false
 amount = 60
+texture = SubResource("NoiseTexture2D_epypp")
 one_shot = true
 explosiveness = 1.0
 trail_lifetime = 0.1

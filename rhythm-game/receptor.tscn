@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://c225y3u62etlh"]
+
+[ext_resource type="Script" uid="uid://b2tk0fj5njo20" path="res://receptor.gd" id="1_sfngy"]
+[ext_resource type="PackedScene" uid="uid://dnn2t7e6tjf08" path="res://receptorAnimation.tscn" id="2_yxycr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dorwl"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h6mog"]
+radius = 0.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxycr"]
+radius = 35.014282
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kl7ww"]
+radius = 71.00704
+
+[node name="Receptor" type="Area2D" unique_id=1693360915]
+script = ExtResource("1_sfngy")
+metadata/_edit_group_ = true
+
+[node name="ReceptorAnimation" parent="." unique_id=1066431229 instance=ExtResource("2_yxycr")]
+scale = Vector2(9, 9)
+
+[node name="PerfectArea" type="Area2D" parent="." unique_id=837413065]
+visible = false
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+
+[node name="Perfect" type="CollisionShape2D" parent="PerfectArea" unique_id=1754368505]
+shape = SubResource("CircleShape2D_dorwl")
+debug_color = Color(0.98676413, 0, 0.34262675, 0.41960785)
+
+[node name="CenterArea" type="Area2D" parent="." unique_id=977901242]
+collision_mask = 0
+monitoring = false
+
+[node name="Center" type="CollisionShape2D" parent="CenterArea" unique_id=1264508344]
+visible = false
+shape = SubResource("CircleShape2D_h6mog")
+debug_color = Color(0.9005909, 0.23151153, 0.5326684, 0.41960785)
+
+[node name="GoodArea" type="Area2D" parent="." unique_id=1335891369]
+visible = false
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+
+[node name="Good" type="CollisionShape2D" parent="GoodArea" unique_id=950337142]
+shape = SubResource("CircleShape2D_yxycr")
+debug_color = Color(0.5666235, 0.5564142, 0.10253916, 0.41960785)
+
+[node name="OkArea" type="Area2D" parent="." unique_id=2040379306]
+collision_layer = 4
+collision_mask = 2
+monitoring = false
+
+[node name="Ok" type="CollisionShape2D" parent="OkArea" unique_id=1456098102]
+shape = SubResource("CircleShape2D_kl7ww")
+debug_color = Color(6.738305e-07, 0.60178024, 0.6916249, 0.41960785)

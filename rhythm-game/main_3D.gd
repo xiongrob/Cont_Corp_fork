@@ -22,10 +22,10 @@ const HIT_WINDOW_OK: float = 0.15
 
 # Corner positions (X, Y, Z at camera plane)
 var corners: Array = [
-	{"pos": Vector3(-5, 5, 0), "key": KEY_Q, "lane": 0, "name": "TopLeft"},
-	{"pos": Vector3(5, 5, 0), "key": KEY_P, "lane": 1, "name": "TopRight"},
+	{"pos": Vector3(-5, 5, 0) , "key": KEY_Q, "lane": 0, "name": "TopLeft"},
+	{"pos": Vector3(5, 5, 0)  , "key": KEY_P, "lane": 1, "name": "TopRight"},
 	{"pos": Vector3(-5, -5, 0), "key": KEY_Z, "lane": 2, "name": "BottomLeft"},
-	{"pos": Vector3(5, -5, 0), "key": KEY_M, "lane": 3, "name": "BottomRight"}
+	{"pos": Vector3(5, -5, 0) , "key": KEY_M, "lane": 3, "name": "BottomRight"}
 ]
 
 # Node references
@@ -35,7 +35,9 @@ var corners: Array = [
 @onready var notes_container: Node3D = $Notes
 
 func _ready():
-	note_scene = preload("res://note.tscn")
+	# Since note_scene is an abstraction of a serialized scene, the godot engine needs to
+	# allocate memory to understand the kind of scene, i.e. by preloading or loading a tscn file.
+	note_scene = preload("res://note_3D.tscn")
 	setup_corner_targets()
 
 func _process(delta: float):
@@ -52,7 +54,7 @@ func _input(event: InputEvent):
 				hit_note(corner.lane)
 
 # Load map from JSON file
-func load_map(json_path: String):
+func load_map(json_path: String) -> bool:
 	var file = FileAccess.open(json_path, FileAccess.READ)
 	if file:
 		var json_string = file.get_as_text()

@@ -1,7 +1,9 @@
 import json
 
 # Path to your .osu file
-osu_file_path = r'G:\My Drive\3. Personal\rhythm_test\osu beatmap\Yunosuke - Kimi wo Mitai (Guest) [Test diff].osu'
+# osu_file_path = r'G:\My Drive\3. Personal\rhythm_test\osu beatmap\Yunosuke - Kimi wo Mitai (Guest) [Test diff].osu'
+# Modified to relative pathing. That way the file path is platform independent.
+osu_file_path = r'./osu beatmap/Yunosuke - Kimi wo Mitai [4k].osu'
 
 # Initialize data structures
 hit_objects = []
@@ -80,7 +82,9 @@ result = {
 }
 
 # Save to JSON
-output_path = r'G:\My Drive\3. Personal\Rhythm Game\output.json'
+# output_path = r'G:\My Drive\3. Personal\Rhythm Game\output.json'
+# Modified to relative pathing. That way the file path is platform independent.
+output_path = r'./output.json'
 with open(output_path, 'w', encoding='utf-8') as f:
     json.dump(result, f, indent=2, ensure_ascii=False)
 

@@ -5,12 +5,39 @@ extends Node2D
 @onready var circle_j = $Circle_J
 @onready var circle_k = $Circle_K
 
+@onready var circles: Array[Node2D] = [$Circle_D, $Circle_F, $Circle_J, $Circle_K]
+
+enum Circle { Blue, Red, Green, Orange, Undefined }
+
+## Undefined can uniquely give the size of the the enum
+func get_num_circles( ) -> int:
+	return Circle.Undefined
+
+func get_circle( key : Key ) -> Circle:
+	# May depend on mode...
+	match key:
+		KEY_D:
+			return Circle.Blue
+		KEY_F:
+			return Circle.Red
+		KEY_J:
+			return Circle.Green
+		KEY_K:
+			return Circle.Orange
+
+	return Circle.Undefined
+
+var circle_pos : Array[Vector2]
+
 # Store original positions
 var original_positions = {}
 
 # Jolt settings
 const JOLT_STRENGTH = 3
 const JOLT_DURATION = 0.1
+
+func _init( ):
+	circle_pos.resize( get_num_circles() )
 
 func _ready():
 	# Store original positions for each circle
@@ -19,19 +46,29 @@ func _ready():
 	original_positions[circle_j] = circle_j.position
 	original_positions[circle_k] = circle_k.position
 
+	for color in Circle.values( ).slice( 0, get_num_circles() ):
+		print( "Initializing cirle ", color, "'s position" )
+		circle_pos[ color ] = circles[ color ].position
+
+	for pos in circle_pos:
+		print( pos )
+
+	print( "Viewport Size: ", get_viewport( ).size )
+	print( "ColorRect Dimensions ", $ColorRect.size.x, " ", $ColorRect.size.y )
+
+## Checks the current positions of each circle and prints it out if there are any changes.
+func _process( delta: float ) -> void:
+	for color in Circle.values( ).slice( 0, get_num_circles() ):
+		if circle_pos[ color ] != circles[ color ].position:
+			circle_pos[ color ] = circles[ color ].position
+			print("Cirle ", color, " position: ", circle_pos[ color ] )
+
 func _input(event):
 	if event is InputEventKey and event.pressed and not event.echo:
 		var key = event.keycode
-		
-		match key:
-			KEY_D:
-				trigger_circle(circle_d)
-			KEY_F:
-				trigger_circle(circle_f)
-			KEY_J:
-				trigger_circle(circle_j)
-			KEY_K:
-				trigger_circle(circle_k)
+		var circle : Circle = get_circle( key )
+		if circle != Circle.Undefined:
+			trigger_circle( circles[ int(circle) ] )
 
 func trigger_circle(circle: Node2D):
 	# Get the particles node (assumes it's a child of the circle)
@@ -52,6 +89,7 @@ func apply_jolt(circle: Node2D):
 	)
 	
 	# Create tween for smooth jolt and return
+	# https://raw.githubusercontent.com/godotengine/godot-docs/master/img/tween_cheatsheet.webp
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
 	tween.set_trans(Tween.TRANS_ELASTIC)

@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://cbl3hwgka1nef"]
+
+[ext_resource type="PackedScene" uid="uid://c225y3u62etlh" path="res://receptor.tscn" id="1_1h7yl"]
+[ext_resource type="Script" uid="uid://bk6x8rhvibbcs" path="res://beatmap.gd" id="1_vienl"]
+
+[node name="BeatMap" type="Node" unique_id=1736629704]
+script = ExtResource("1_vienl")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1077240237]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12513235, 0.12512228, 0.16647366, 1)
+
+[node name="ReceptorBlue" parent="." unique_id=1693360915 instance=ExtResource("1_1h7yl")]
+position = Vector2(150, 500)
+
+[node name="ReceptorRed" parent="." unique_id=1139108330 instance=ExtResource("1_1h7yl")]
+position = Vector2(500, 150)
+
+[node name="ReceptorGreen" parent="." unique_id=589809148 instance=ExtResource("1_1h7yl")]
+position = Vector2(850, 500)
+
+[node name="ReceptorYellow" parent="." unique_id=585170828 instance=ExtResource("1_1h7yl")]
+position = Vector2(500, 850)
+
+[node name="NoteEmitter" type="Timer" parent="." unique_id=209016683]
+editor_description = "On the timeout signal, spawn a note based on which receptor it's associated with."
+
+[node name="HitDetect" type="Label" parent="." unique_id=262695774]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = -247.0
+offset_right = 368.0
+offset_bottom = -139.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Perfect!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HitDetectTimer" type="Timer" parent="." unique_id=1043874429]
+one_shot = true

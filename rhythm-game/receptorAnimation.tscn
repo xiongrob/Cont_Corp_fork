@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://dnn2t7e6tjf08"]
+
+[ext_resource type="Script" uid="uid://csyoasj5ogm8a" path="res://receptorAnimation.gd" id="1_rngf7"]
+[ext_resource type="Texture2D" uid="uid://deqx3as1xgwnn" path="res://targets_neutral.png" id="2_byxx7"]
+[ext_resource type="Texture2D" uid="uid://b7iuupxh4bndr" path="res://presets/slight_hold_curve.tres" id="3_byxx7"]
+
+[sub_resource type="Gradient" id="Gradient_byxx7"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yprv1"]
+gradient = SubResource("Gradient_byxx7")
+width = 5
+height = 5
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rngf7"]
+lifetime_randomness = 0.9
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 8.0
+emission_ring_inner_radius = 7.0
+emission_ring_cone_angle = 90.0
+inherit_velocity_ratio = 0.655
+spread = 180.0
+initial_velocity_min = 64.6
+initial_velocity_max = 131.78
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -31.270002
+linear_accel_max = 35.909996
+radial_accel_min = -100.0
+radial_accel_max = -29.970001
+tangential_accel_min = -50.39
+tangential_accel_max = 16.279997
+damping_min = 68.992004
+damping_max = 100.00001
+color = Color(0.3529412, 0.6431373, 0.78039217, 1)
+alpha_curve = ExtResource("3_byxx7")
+hue_variation_min = -0.030000022
+hue_variation_max = 0.029999977
+
+[node name="ReceptorAnimation" type="Node2D" unique_id=1790270093]
+script = ExtResource("1_rngf7")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=716600597]
+texture = ExtResource("2_byxx7")
+hframes = 4
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=1578062555]
+emitting = false
+amount = 60
+texture = SubResource("GradientTexture2D_yprv1")
+one_shot = true
+explosiveness = 1.0
+visibility_rect = Rect2(-108.50968, -111.34581, 196.72055, 215.22147)
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_rngf7")
