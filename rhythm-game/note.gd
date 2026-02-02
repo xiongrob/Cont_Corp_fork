@@ -75,6 +75,8 @@ func start( start_pos : Vector2, dests : Array[Area2D], time_stamps : Array[floa
 
 	dir_vec = ( dest_receptor( ).position - start_pos ).normalized( )
 
+func 
+
 ## For handling when the center of the receptor has been reached
 ## Fix this such that once a trigger has occured, need to check for release of key, depending on
 ## the kind of note such that successive key presses doesn't always register for future notes
@@ -122,7 +124,8 @@ func _on_exiting_receptor( area: Node2D ):
 	# print( "Exiting Receptor: ", GlobalEnums.exited, " times" )
 	assert( center_reached, "Center should have reached" )
 	assert( GlobalEnums.entered == GlobalEnums.exited, "A note needs to enter and exit the same amount of times." )
-	hitbox_detect_node.get_parent( ).collision_layer |= GlobalEnums.CollisionMask.Hit_Detect
+	hitbox_detect_node.monitoring = true # This may have been turned off 
+	# hitbox_detect_node.get_parent( ).collision_layer |= GlobalEnums.CollisionMask.Hit_Detect
 
 func _on_visible_on_screen_notifier_2d_screen_exited( ):
 	queue_free( )
