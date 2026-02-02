@@ -7,9 +7,10 @@ var time_stamps : Array[float]
 var dir_vec : Vector2 # Normal vector providing direction for the dest_receptor( )
 var center_reached : bool = false # Used to detect when the center has been reached on a frame
 @export var speed : int = 500
-@onready var triggered : bool = false
-@export var hitbox_detect_node : Area2D
-@export var receptor_detect_node : Area2D
+@onready var acked : bool = false
+@onready var exited : bool = false
+# @export var hitbox_detect_node : Area2D
+# @export var receptor_detect_node : Area2D
 
 func dest_receptor( ) -> Area2D:
 	assert( dest_receptors.size( ) != 0, "Should have a destination receptor" )
@@ -22,18 +23,21 @@ func _ready() -> void:
 
 	## Used to indirectly reference a node along a path.
 	## This creates a single point of maintainence if the path needs to be changed...
-	hitbox_detect_node = $HitBoxOverlapping
-	receptor_detect_node = $ReceptorDetect
+	# hitbox_detect_node = $HitBoxOverlapping
+	# receptor_detect_node = $ReceptorDetect
 
 	
 	$VisibleOnScreenNotifier2D.screen_exited.connect( _on_visible_on_screen_notifier_2d_screen_exited )
 	# Area_entered will trigger when another Area2D enters Area2D, 
 	# whereas body_entered will trigger when a PhysicsBody2D enters the Area2D.
-	hitbox_detect_node.area_entered.connect( _on_center_of_receptor_reached )
-	receptor_detect_node.area_exited.connect( _on_exiting_receptor )
+	area_entered.connect( _on_center_of_receptor_reached )
+	area_exited.connect( _on_exiting_receptor )
 
 	## CollisionShape2D.get_parent( ) == CollisionObject2D
 	## assert( $CollisionShape2D.get_parent( ).collision_layer == int(GlobalEnums.CollisionMask.Center), "Note should only detect the center at the moment" )
+
+func get_receptor_time_stamp( ) -> float:
+	return 0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -68,14 +72,29 @@ func _physics_process(delta: float) -> void:
 func start( start_pos : Vector2, dests : Array[Area2D], time_stamps : Array[float] ) -> void:
 	assert( dests.size( ) != 0, "Destintation receptors should not be empty" )
 
-	hitbox_detect_node.get_node( "CollisionShape2D" ).disabled = false
-	receptor_detect_node.get_node( "CollisionShape2D" ).disabled = false
+	$"CollisionShape2D".disabled = false
+	# receptor_detect_node.get_node( "CollisionShape2D" ).disabled = false
 	position = start_pos
 	dest_receptors = dests
 
 	dir_vec = ( dest_receptor( ).position - start_pos ).normalized( )
 
-func 
+## Signals to the note that the receptor has acceptted this note. Hence, setting note to no longer be monitorable, if there still are 
+## 
+func acknowledge_receptor( ) -> void:
+	assert( !acked, "Should have yet to have triggered." )
+	acked = true
+	if dest_receptors.size( ) == 1: # No more receptors to travel to...
+		exited = true
+		# Needs to be called at the end of the current frame to avoid physics calculations
+		call_deferred( "queue_free" ) # need to schedule this method to occur at the end of the current frame
+		if ( center_reached ):
+			GlobalEnums.exited += 1
+		print( "Exiting Receptor(via being triggered): ", GlobalEnums.exited, " times" )
+	else:
+		$CollisionShape2D.get_parent( ).call_deferred( "set_collision_layer_value", 2, false )
+		# $CollisionShape2D.get_parent( ).set_collision_layer_value( 2, false )
+		# hitbox_detect_node.get_node( "CollisionShape2D" ).set_deferred( "disabled", true )
 
 ## For handling when the center of the receptor has been reached
 ## Fix this such that once a trigger has occured, need to check for release of key, depending on
@@ -91,9 +110,19 @@ func
 
 ## Since overlappping areas are
 func _on_center_of_receptor_reached( area: Node2D ):
+	if ( area.name == "OkArea" ):
+		return
+	assert( center_reached, "Center should have been reached" )
 	GlobalEnums.entered += 1
-	# print( "Center Reached: ", GlobalEnums.entered, " times" )
+	print( "Center Reached: ", GlobalEnums.entered, " times" )
+	print( "Area Node Entered: ", area.name )
 	assert( area.get_parent( ) == dest_receptor( ), "The destination receptor should be the one at the center" )
+	$CollisionShape2D.get_parent( ).call_deferred( "set_collision_mask_value", 3, true )
+	# $CollisionShape2D.get_parent( ).set_collision_mask_value( 3, true )
+	
+	## It is very likely due to needing change the hitbox of the note, that I will need to put this
+	## in the physics_process section due to it being prematurely called before the center has been
+	## passed over, as evident when center_reached was still false when I increased the hitbox size.
 	if ( dest_receptors.size( ) > 1 ):
 		dest_receptors.pop_back( )
 		dir_vec = ( dest_receptor( ).position - position ).normalized( )
@@ -120,12 +149,21 @@ func _on_center_of_receptor_reached( area: Node2D ):
 ## the receptor has triggered on it. Once the receptor leaves, 
 ## detection is to be turned back on.
 func _on_exiting_receptor( area: Node2D ):
+	if ( area.name == "CenterArea" || exited ):
+		return
+	print( "Exiting area: ", area.name )
 	GlobalEnums.exited += 1
-	# print( "Exiting Receptor: ", GlobalEnums.exited, " times" )
+	print( "Exiting Receptor: ", GlobalEnums.exited, " times" )
 	assert( center_reached, "Center should have reached" )
 	assert( GlobalEnums.entered == GlobalEnums.exited, "A note needs to enter and exit the same amount of times." )
-	hitbox_detect_node.monitoring = true # This may have been turned off 
+	# var not_triggered : bool = $CollisionShape2D.get_parent( ).get_collision_layer_value( 2 )
+	
+	# hitbox_detect_node.get_node( "CollisionShape2D" ).disabled = false # This may have been turned off 
 	# hitbox_detect_node.get_parent( ).collision_layer |= GlobalEnums.CollisionMask.Hit_Detect
-
+	if ( !acked ):
+		area.get_parent( ).note_precision_message.emit( "Missed..." )
+	acked = false
+	$CollisionShape2D.get_parent( ).set_collision_mask_value( 3, false )
+	exited = true
 func _on_visible_on_screen_notifier_2d_screen_exited( ):
 	queue_free( )

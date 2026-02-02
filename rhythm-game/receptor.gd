@@ -1,13 +1,21 @@
 extends Area2D
 
 var circle_pos : Vector2
+var hit_circles : Array[Area2D]
 @export var sprite_node : Node2D
 signal note_precision_message
+
+const hits : Array[String] = [ "Perfect!", "Good!", "Okay" ]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	sprite_node = $ReceptorAnimation
 	circle_pos = $ReceptorAnimation/Sprite.position
+
+	hit_circles.resize( 3 )
+	hit_circles[ 0 ] = $PerfectArea
+	hit_circles[ 1 ] = $GoodArea
+	hit_circles[ 2 ] = $OkArea
 	# Center the node for testing purposes
 	# position = Vector2(300, 300)
 
@@ -24,25 +32,30 @@ func _ready() -> void:
 	# 	circle_pos = $ReceptorAnimation/Sprite.position
 	# 	print( "Circle position: ", circle_pos )
 
-func _physics_process( _delta: float ) -> void:
-	if ( !$PerfectArea.monitoring ):
-		return
-	var detect_note : bool = true
-	if ( $PerfectArea.has_overlapping_areas( ) ):
-		note_precision_message.emit( "Perfect" )
-		print( "Perfect!" )
-	elif ( $GoodArea.has_overlapping_areas( ) ):
-		note_precision_message.emit( "Good!" )
-		print( "Good!" )
-	elif ( $OkArea.has_overlapping_areas( ) ):
-		note_precision_message.emit( "Okay" )
-		print( "Okay" )
-	else:
-		detect_note = false
+func get_closest_node( hit_circle : Area2D ) -> Area2D:
+	assert( hit_circle.has_overlapping_areas(), "Should have overlapping areas" )
+	var closest_note : Area2D = hit_circle.get_overlapping_areas( )[ 0 ]
 
-	if detect_note:
-		## Turn off monitoring until the key has been let go of, and pressed again
-		set_receptor_monitoring( false ) # 
+	for note in hit_circle.get_overlapping_areas( ):
+		if ( note.get_receptor_time_stamp( ) < closest_note.get_receptor_time_stamp( ) ):
+			closest_note = note
+	return closest_note
+
+func _physics_process( _delta: float ) -> void:
+	if ( !hit_circles[ 0 ].monitoring ):
+		return
+	var idx : int = 0
+	for hit_circle in hit_circles:
+		if ( hit_circle.has_overlapping_areas( ) ):
+			print( "Detected a note in : ", hits[ idx ], " area." )
+			var note : Area2D = get_closest_node( hit_circle )
+			assert( !note.center_reached || GlobalEnums.entered != GlobalEnums.exited, "A note should'nt have the same number of enters and exits." )
+			assert( note.exited == false, "Note should have not have exited." )
+			note.acknowledge_receptor( ) # Trigger note
+			call_deferred( "set_receptor_monitoring", false )
+			note_precision_message.emit( hits[ idx ] )
+			return
+		idx += 1
 
 ## Sets position iff it is within bounds
 func set_receptor_pos( pos : Vector2 ) -> bool:
@@ -67,6 +80,5 @@ func check_collisions( ) -> GlobalEnums.Precision:
 	return GlobalEnums.Precision.Miss
 
 func set_receptor_monitoring( _monitoring : bool ) -> void:
-	$PerfectArea.monitoring = _monitoring
-	$GoodArea.monitoring = _monitoring
-	$OkArea.monitoring = _monitoring 
+	for hit_circle in hit_circles:
+		hit_circle.monitoring = _monitoring
