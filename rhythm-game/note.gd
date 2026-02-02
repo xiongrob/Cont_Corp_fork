@@ -6,7 +6,7 @@ var dest_receptors : Array[Area2D] # Implements a queue (meant for combos)
 var time_stamps : Array[float]
 var dir_vec : Vector2 # Normal vector providing direction for the dest_receptor( )
 var center_reached : bool = false # Used to detect when the center has been reached on a frame
-@export var speed : int = 1000
+@export var speed : int = 500
 @onready var triggered : bool = false
 @export var hitbox_detect_node : Area2D
 @export var receptor_detect_node : Area2D

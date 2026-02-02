@@ -28,21 +28,3 @@ position = Vector2(500, 850)
 
 [node name="NoteEmitter" type="Timer" parent="." unique_id=209016683]
 editor_description = "On the timeout signal, spawn a note based on which receptor it's associated with."
-
-[node name="HitDetect" type="Label" parent="." unique_id=262695774]
-visible = false
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 100.0
-offset_top = -247.0
-offset_right = 368.0
-offset_bottom = -139.0
-grow_vertical = 0
-theme_override_font_sizes/font_size = 30
-text = "Perfect!"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="HitDetectTimer" type="Timer" parent="." unique_id=1043874429]
-one_shot = true
