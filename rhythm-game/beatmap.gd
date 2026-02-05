@@ -42,6 +42,8 @@ func get_center_pos( ) -> Vector2:
 	return screen_size / 2
 
 func _init( ) -> void:
+	TimingWindow.run_expectations( )
+
 	receptors.resize( NUM_CIRCLES )
 	receptors_ctrl.resize( NUM_CIRCLES )
 	labels.resize( NUM_CIRCLES )
@@ -147,8 +149,8 @@ func _on_hit_detect_timer_timeout( ) -> void:
 	$HitDetect.hide( )
 
 func _on_note_emitter_timeout( ) -> void:
-	var random_receptor = receptors.pick_random( )
-	# var random_receptor = receptors[ 0 ]
+	# var random_receptor = receptors.pick_random( )
+	var random_receptor = receptors[ 0 ]
 	var note = note_scene.instantiate( )
 	var destination_receptors : Array[Area2D] = [ random_receptor ]
 	var center_pos : Vector2 = get_center_pos( )

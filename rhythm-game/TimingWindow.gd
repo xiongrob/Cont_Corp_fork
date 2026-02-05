@@ -68,8 +68,8 @@ static func get_precision_of_timing_window_ceiling( timing_deviation : int ) -> 
 
 ## This will include the possiblity of floats, which will implicily floor it 
 static func get_precision_of_timing_window( timing_deviation : float ) -> Precision:
-	var rounded_up : int = ceiling( timing_deviation )
-	return get_precision_of_timing_window_floored( rounded_up )
+	var rounded_up : int = ceil( timing_deviation )
+	return get_precision_of_timing_window_ceiling( rounded_up )
 
 static func run_expectations( ) -> void:
 	var save_timing_windows : Array[ int ] = timing_windows
@@ -83,7 +83,13 @@ static func run_expectations( ) -> void:
 		bounds[ 0 ] = bounds[ 1 ] + 1
 		bounds[ 1 ] = timing_windows[ idx ]
 		for i in range( bounds.size() ):
-			assert( get_precision_of_timing_window_floored( bounds[i] ) == INT_TO_PRECISION_ENUM[ idx ] )
+			assert( get_precision_of_timing_window_ceiling( bounds[i] ) == INT_TO_PRECISION_ENUM[ idx ] )
+
+	assert( bounds[0] == 8 && bounds[1] == 9 );
+	bounds[ 0 ] = 10
+	bounds[ 1 ] = 11
+	for i in range( bounds.size() ):
+		assert( get_precision_of_timing_window_ceiling( bounds[i] ) == Precision.Out )
 
 	timing_windows = save_timing_windows
 	OD = save_overall_difficult

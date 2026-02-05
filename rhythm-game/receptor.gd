@@ -33,7 +33,7 @@ func _ready() -> void:
 	# 	print( "Circle position: ", circle_pos )
 
 func get_closest_node( hit_circle : Area2D ) -> Area2D:
-	assert( hit_circle.has_overlapping_areas(), "Should have overlapping areas" )
+	assert( hit_circle.has_overlapping_areas( ), "Should have overlapping areas" )
 	var closest_note : Area2D = hit_circle.get_overlapping_areas( )[ 0 ]
 
 	for note in hit_circle.get_overlapping_areas( ):
@@ -42,7 +42,10 @@ func get_closest_node( hit_circle : Area2D ) -> Area2D:
 	return closest_note
 
 func _physics_process( _delta: float ) -> void:
-	if ( !hit_circles[ 0 ].monitoring ):
+	## Do nothing if the receptor isn't monitoring
+	## or OkaArea doesn't detect any overlapping areas 
+	## (which implies no notes are in the vicinity).
+	if ( !hit_circles[ 0 ].monitoring || !$OkArea.has_overlapping_areas( ) ):
 		return
 	var idx : int = 0
 	for hit_circle in hit_circles:

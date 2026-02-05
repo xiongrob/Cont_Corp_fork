@@ -5,6 +5,8 @@ extends Area2D
 var dest_receptors : Array[Area2D] # Implements a queue (meant for combos)
 var time_stamps : Array[float]
 var dir_vec : Vector2 # Normal vector providing direction for the dest_receptor( )
+var velocity : Vector2 # Calculated based on the initial distance from either 
+					   # the center or the source receptor, to the distance to the destination receptor
 var center_reached : bool = false # Used to detect when the center has been reached on a frame
 @export var speed : int = 500
 @onready var acked : bool = false
@@ -36,13 +38,26 @@ func _ready() -> void:
 	## CollisionShape2D.get_parent( ) == CollisionObject2D
 	## assert( $CollisionShape2D.get_parent( ).collision_layer == int(GlobalEnums.CollisionMask.Center), "Note should only detect the center at the moment" )
 
+##TODO: Implement full functionalities once timestamps are inserted...
 func get_receptor_time_stamp( ) -> float:
 	return 0
 
+func set_new_velociy( source_pos : Vector2, dest_pos : Vector2, time_elapsed_beg : float ) -> void:
+	var dist : Vector2 = dest_pos - source_pos
+
+
+##TODO: Implement velocity to depend on the timestamp
+func curr_velocity( ) -> Vector2:
+	assert(false)
+	var speed = 500
+	return Vector2(0,0)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	# if ( dest_receptors.size( ) < 1 ):
-	# 	return
+	## No processing is needed
+	if ( dest_receptors.size( ) == 0 ):
+		return
+	var distance : Vector2 = curr_velocity( )
 	var new_position : Vector2 = position + dir_vec * speed * delta
 
 	# The idea here is that the normal vector when combined will tell us, if the
@@ -50,26 +65,30 @@ func _physics_process(delta: float) -> void:
 	# normal vector are at different directions. If they are, then it must be the case
 	# that during this frame the note passes through the center of the receptor. 
 	# Likewise, the resultant vector itself must be zero (1 + -1 == 0).
+	##NOTE: An edge case is in the very slim case that position is already at the center, traveling to it on the
+	## the previous frame, check that against, the target receptor.
 	var result_normal_vec = dir_vec + ( dest_receptor( ).position - new_position ).normalized( )
+	var passes_through_receptor_center : bool = position == dest_receptor( ).position || result_normal_vec == Vector2( 0, 0 )
 
-	# Momentarily set position to the center for a frame
 	## This essentially checks a range of positions relative to the receptor's position. If it is the case
-	## that on this frame, the note would have passed the center of the receptor, then mark is true 
-	## (as to prevent the note from getting stuck at the receptor position),
-	## and for the current frame, set the position to the receptor's position, in order for signals
-	## that need to be emitted when passing the center can be done. This is important since
-	## in the case that the direction needs to be changed, due to combos, it can be change directions accurately.
-	if !center_reached && result_normal_vec == Vector2(0,0):
-		center_reached = true
+	## that on this frame, the note would have passed the center of the receptor, then 
+	## check if this a combo so that the note can change directions, according to the next receptor.
+	## Calculate the rest of the positioning based on the leftover time on delta, and travel in that direction.
+	if passes_through_receptor_center:
+		## V = D / delta -> D = recep_pos - curr_pos, V = dir_vec * speed
+		## delta -= dest_receptor( ).position ( dir_vec * speed )
 		position = dest_receptor( ).position
-	else:
-		position = new_position
+		if ( dest_receptors.size( ) > 1 ):
+			dest_receptors.pop_back( )
+			dir_vec = ( dest_receptor( ).position - position ).normalized( )
+
+	position = position + dir_vec * speed * delta
 
 ## Used to initialize note.
 ## start position: From where on the view port should a note start.
 ## Dests: array of receptors the note needs to travel to
 ## time_stamps: array of time_stamps necessary for prioritizing which note the receptor detects for (Ordered from most negative, to most positive)
-func start( start_pos : Vector2, dests : Array[Area2D], time_stamps : Array[float] ) -> void:
+func start( start_pos : Vector2, dests : Array[Area2D], curr_time_stamp : float, time_stamps : Array[float] ) -> void:
 	assert( dests.size( ) != 0, "Destintation receptors should not be empty" )
 
 	$"CollisionShape2D".disabled = false
@@ -117,8 +136,6 @@ func _on_center_of_receptor_reached( area: Node2D ):
 	print( "Center Reached: ", GlobalEnums.entered, " times" )
 	print( "Area Node Entered: ", area.name )
 	assert( area.get_parent( ) == dest_receptor( ), "The destination receptor should be the one at the center" )
-	$CollisionShape2D.get_parent( ).call_deferred( "set_collision_mask_value", 3, true )
-	# $CollisionShape2D.get_parent( ).set_collision_mask_value( 3, true )
 	
 	## It is very likely due to needing change the hitbox of the note, that I will need to put this
 	## in the physics_process section due to it being prematurely called before the center has been
