@@ -42,7 +42,7 @@ func get_center_pos( ) -> Vector2:
 	return screen_size / 2
 
 func _init( ) -> void:
-	TimingWindow.run_expectations( )
+	TimingWindow.verify_boundaries_of_timing_windows( )
 
 	receptors.resize( NUM_CIRCLES )
 	receptors_ctrl.resize( NUM_CIRCLES )

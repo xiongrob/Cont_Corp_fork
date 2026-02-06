@@ -25,7 +25,7 @@ const DIFFICULTY_CONST : Array[ int ] = [ 0, 3, 2, 2, 3, 3 ]
 enum Precision { Perfect, Great, Okay, Meh, Miss, Out }
 const TIMINGS : int = int( Precision.Out )
 ## Reverse Mapping
-static var INT_TO_PRECISION_ENUM : Array[ Precision ] = [ 
+const INT_TO_PRECISION_ENUM : Array[ Precision ] = [ 
 	Precision.Perfect, Precision.Great, Precision.Okay, Precision.Meh, Precision.Miss, Precision.Out ]
 
 static func set_OD( overall_difficulty_multiplier : int ) -> void:
@@ -71,25 +71,25 @@ static func get_precision_of_timing_window( timing_deviation : float ) -> Precis
 	var rounded_up : int = ceil( timing_deviation )
 	return get_precision_of_timing_window_ceiling( rounded_up )
 
-static func run_expectations( ) -> void:
+static func verify_boundaries_of_timing_windows( ) -> void:
 	var save_timing_windows : Array[ int ] = timing_windows
 	var save_overall_difficult : int = OD
 
-	timing_windows = [ 1, 3, 5, 7, 9 ]
+	timing_windows = [ 10, 20, 30, 40, 50 ]
+	var lower : int = 0
+	
+	## Sweeps through each integer value within timing_windows, based on the lower 
+	for idx in range( timing_windows.size( ) ):
+		var upper : int = timing_windows[ idx ]
+		for timing_window in range( lower, upper + 1 ):
+			# print( "Testing timing Window: ", timing_window, " on precision zone: ", INT_TO_PRECISION_ENUM[ idx ] )
+			assert( get_precision_of_timing_window_ceiling(timing_window) == INT_TO_PRECISION_ENUM[idx], "Timing Window is off" )
+		lower = upper + 1
 
-	var bounds : Array[ int ] = [-1, -1] ## [0, 1], [2, 3], [4, 5], ...
-
-	for idx in range( timing_windows.size() ):
-		bounds[ 0 ] = bounds[ 1 ] + 1
-		bounds[ 1 ] = timing_windows[ idx ]
-		for i in range( bounds.size() ):
-			assert( get_precision_of_timing_window_ceiling( bounds[i] ) == INT_TO_PRECISION_ENUM[ idx ] )
-
-	assert( bounds[0] == 8 && bounds[1] == 9 );
-	bounds[ 0 ] = 10
-	bounds[ 1 ] = 11
-	for i in range( bounds.size() ):
-		assert( get_precision_of_timing_window_ceiling( bounds[i] ) == Precision.Out )
+	## Test the boundaries from the boundary between Ok and Out.
+	for timing_window in range( lower, lower + 10 ):
+		# print( "Testing timing Window: ", timing_window, " on precision zone: ", Precision.Out )
+		assert( get_precision_of_timing_window_ceiling( timing_window ) == Precision.Out )
 
 	timing_windows = save_timing_windows
 	OD = save_overall_difficult
